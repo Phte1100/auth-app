@@ -65,10 +65,12 @@ router.post("/login", async(req, res) => {
             return res.status(401)({ error : "Incorrect username/password! "});
         }
 
+        // Check password
         const isPasswordMatch = await user.comparePassword(password);
         if(!isPasswordMatch) {
             return res.status(401)({ error : "Incorrect username/password! "});
         } else {
+            
             res.status(200).json({ message: "user logged in!" });
         }
 
