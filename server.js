@@ -39,6 +39,18 @@ function authenticateToken(req, res, next) {
     });
 }
 
+// test - lista
+
+app.get("/api/users", authenticateToken, async (req, res) => {
+    try {
+        const users = await User.find({}, 'username');  // Hämtar bara användarnamnen
+        res.json(users);
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 
 // Start application
 app.listen(port, () => {
