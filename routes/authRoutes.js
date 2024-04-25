@@ -15,7 +15,9 @@ mongoose.connect(process.env.DATABASE).then(() => {
 // Add a new user
 router.post("/register", async (req, res) => {
     try {
-        const { username, password } = req.body;
+        let { username, password } = req.body;
+        username = username.replace(/(<([^>]+)>)/ig, ''); // Sanera användarnamnet
+        password = password.replace(/(<([^>]+)>)/ig, ''); // Sanera lösenordet 
         if (!username || !password) {
             return res.status(400).json({ error: "Invalid input, send username and password"});
         }

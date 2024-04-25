@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const authRoutes = require("./routes/authRoutes");
+const User = require("./models/User");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
@@ -39,20 +40,15 @@ function authenticateToken(req, res, next) {
     });
 }
 
-// test - lista
-
 app.get("/api/users", authenticateToken, async (req, res) => {
     try {
-        let result = await User.find({});
-        console.log("Users fetched:", result); // Logga resultatet
-        res.json(result);
-    } catch(error) {
+        const users = await User.find({});
+        res.json(users);
+    } catch (error) {
         console.error("Error fetching users:", error);
-        res.status(500).json({ error: "Internal server error" });
+        res.status(500).json({ error: "Internal Server Error" });
     }
 });
-
-
 
 // Start application
 app.listen(port, () => {
