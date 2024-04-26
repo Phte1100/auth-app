@@ -22,7 +22,6 @@ app.get("/api/protected", authenticateToken, (req, res) => {
 // Validate token
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
-    console.log(`Authorization Header: ${authHeader}`);
     const token = authHeader && authHeader.split(' ')[1];
 
     if (token == null) {
@@ -34,7 +33,6 @@ function authenticateToken(req, res, next) {
             return res.status(403).json({ message: "Not correct JWT" });
         }
 
-        console.log('User from token:', JSON.stringify(user));
         req.user = user;
         next();
     });
