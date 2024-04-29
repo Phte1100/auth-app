@@ -7,3 +7,12 @@ För att hantera inloggningar, så används JWT (JSON Web Token) till användare
 Användningen av HTTPS är också viktigt eftersom det ger en säker kanal även över osäkra nätverk, som offentliga WiFi-nätverk.
 
 Allt detta är viktigt för att skapa en trygg och säker miljö för användarna på min webbsida.
+
+Tabell-namn	Fält
+Test	    id (int(11)), "username" (varchar(256)), "password" (varchar(256)), "created" (date)
+
+Metod	Ändpunkt	    Beskrivning
+GET	    /api/users	    Hämtar alla användare. Kräver JWT för autentisering.
+GET	    /api/protected	Hämtar ett meddelande om att rutan är skyddad. Kräver JWT för autentisering.
+POST	/api/register	Registrerar en ny användare. Kräver användarnamn och lösenord.
+POST	/api/login	    Loggar in en användare och returnerar en JWT. Kräver användarnamn och lösenord.
